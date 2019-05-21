@@ -1,0 +1,72 @@
+<mvc:View
+	controllerName="sap.ui.demo.basicTemplate.controller.Home"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page
+		id="page"
+		title="{i18n>title}">
+		<headerContent>
+			<Button
+				type="Emphasized"
+				icon="sap-icon://add"
+				press=".onCreate"/>
+		</headerContent>
+		<content>
+			<List
+				items="{
+					path: '/todos',
+					sorter: {
+						path: '',
+						group: '.grouper'
+					},
+					groupHeaderFactory: '.getGroupHeader'
+				}"
+				mode="Delete"
+				itemPress=".onEdit"
+				delete=".onDelete">
+				<CustomListItem
+					type="Active"
+					class="todo">
+					<content>
+						<l:FixFlex
+							fixFirst="false"
+							vertical="false">
+							<l:fixContent>
+								<Button
+									type="Accept"
+									icon="sap-icon://complete"
+									text="{i18n>homeDoneTooltip}"
+									tooltip="{i18n>homeDoneTooltip}"
+									class="done sapUiTinyMarginEnd"
+									press=".done"/>
+								<Button
+									type="Reject"
+									icon="sap-icon://past"
+									text="{i18n>homeSnoozeTooltip}"
+									tooltip="{i18n>homeSnoozeTooltip}"
+									class="snooze sapUiTinyMarginEnd"
+									press=".snooze"/>
+							</l:fixContent>
+							<l:flexContent>
+								<l:HorizontalLayout class="sapUiSmallMargin">
+									<core:Icon
+										color="Default"
+										src="{icon}"
+										size="2.5rem"
+										class="sapUiSmallMarginEnd"/>
+									<l:VerticalLayout>
+										<Title titleStyle="H2" level="H2"  text="{title}"/>
+										<Text text="{description}"/>
+									</l:VerticalLayout>
+								</l:HorizontalLayout>
+							</l:flexContent>
+						</l:FixFlex>
+					</content>
+				</CustomListItem>
+			</List>
+		</content>
+	</Page>
+</mvc:View>

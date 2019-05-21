@@ -1,0 +1,21 @@
+/* add your custom styles here */
+
+.dotodo .group {
+
+}
+
+/* for some reason Flex height is always 0*/
+.dotodo .todo .sapUiFixFlexFlexible {
+	height: 4.5rem;
+}
+
+/* vertically center delete icon */
+.dotodo .todo .sapMLIBIconDel {
+	margin-top: 0;
+}
+
+/* vertically center action buttons */
+.dotodo .todo .done,
+.dotodo .todo .snooze {
+	margin-top: 0.75rem;
+}
