@@ -6,7 +6,7 @@
 
 /* for some reason Flex height is always 0*/
 .dotodo .todo .sapUiFixFlexFlexible {
-	height: 4.5rem;
+	height: 6.5rem;
 }
 
 /* vertically center delete icon */

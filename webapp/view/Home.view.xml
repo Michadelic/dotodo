@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="sap.ui.demo.basicTemplate.controller.Home"
+	controllerName="michadelic.dotodo.controller.Home"
 	displayBlock="true"
 	xmlns="sap.m"
 	xmlns:l="sap.ui.layout"
@@ -19,17 +19,18 @@
 				items="{
 					path: '/todos',
 					sorter: {
-						path: '',
+						path: 'title',
 						group: '.grouper'
-					},
-					groupHeaderFactory: '.getGroupHeader'
+					}
 				}"
 				mode="Delete"
+				growing="false"
 				itemPress=".onEdit"
 				delete=".onDelete">
 				<CustomListItem
 					type="Active"
-					class="todo">
+					class="todo"
+					counter="{= ${amount} - ${lastAmount} }">
 					<content>
 						<l:FixFlex
 							fixFirst="false"
@@ -60,6 +61,10 @@
 									<l:VerticalLayout>
 										<Title titleStyle="H2" level="H2"  text="{title}"/>
 										<Text text="{description}"/>
+										<Text text="{
+											path: '',
+											formatter: '.formatter.debugInfos'
+										}"/>
 									</l:VerticalLayout>
 								</l:HorizontalLayout>
 							</l:flexContent>

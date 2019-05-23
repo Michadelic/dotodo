@@ -1,10 +1,10 @@
 sap.ui.define([
 	"./BaseController",
-	"sap/ui/demo/basicTemplate/model/formatter"
+	"michadelic/dotodo/model/formatter"
 ], function(Controller, formatter) {
 	"use strict";
 
-	return Controller.extend("sap.ui.demo.basicTemplate.controller.App", {
+	return Controller.extend("michadelic.dotodo.controller.App", {
 
 		formatter: formatter,
 

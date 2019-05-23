@@ -1,19 +1,21 @@
 sap.ui.define([
 	"./BaseController",
+	"./constants",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox",
 	"sap/m/Button",
 	"sap/ui/core/Icon",
 	"sap/m/GroupHeaderListItem",
-	"../model/formatter"
-], function(Controller, MessageToast, MessageBox, Button, Icon, GroupHeaderListItem, formatter) {
+	"../model/formatter",
+	"./TODOCalculator"
+], function(Controller, constants, MessageToast, MessageBox, Button, Icon, GroupHeaderListItem, formatter, TODOCalculator) {
 	"use strict";
 
-	const ONE_DAY = 86400 * 1000;
-
-	return Controller.extend("sap.ui.demo.basicTemplate.controller.Home", {
+	return Controller.extend("michadelic.dotodo.controller.Home", {
 
 		formatter: formatter,
+
+		TODOCalculator: new TODOCalculator(),
 
 		onInit: function () {
 
@@ -55,34 +57,46 @@ sap.ui.define([
 		grouper: function (oContext) {
 			var bValid = oContext.getObject();
 			if (bValid) {
-				var iDelta = Date.now() - oContext.getObject().lastDone;
-				// überfällig, fällig, next, später
-				if (iDelta < ONE_DAY && iDelta > 0) {
-					return "fällig";
-				} else if (iDelta > ONE_DAY) {
-					return "überfällig";
-				} else {
-					return "next";
-				}
+				var oObject = oContext.getObject();
+				return this.TODOCalculator.getNextDate(oObject);
 			}
 		},
 
-		getGroupHeader: function (oGroup) {
+		/*getGroupHeader: function (oGroup) {
 			var bVisible = !(oGroup.key === "");
 
 			return new GroupHeaderListItem({
 				title: oGroup.key,
 				visible: bVisible
 			}).addStyleClass("group");
-		},
+		},*/
 
 		done: function (oEvent) {
 			var oContext = oEvent.getSource().getBindingContext();
 
 			oContext.getObject().lastDone = Date.now();
+			oContext.getObject().lastAmount++;
 			oContext.setUpdated(true);
 			this.getModel().updateBindings(true);
 			MessageToast.show(this.getResourceBundle().getText("homeDoneConfirm", [oContext.getProperty("title")]));
+		},
+
+		snooze: function (oEvent) {
+			var oContext = oEvent.getSource().getBindingContext();
+			var oNow = new Date();
+			var oDateToday = new Date(oNow.getFullYear(), oNow.getMonth(), oNow.getDate());
+			var iMultiplier = 1;
+			var oObject = oContext.getObject();
+
+			switch (oObject.frequency) {
+				case constants.FREQUENCY_WEEKLY: iMultiplier = 7; break;
+				case constants.FREQUENCY_MONTHLY: iMultiplier = 30; break;
+			}
+
+			oContext.getObject().lastDone = oDateToday + constants.ONE_DAY * (iMultiplier + 1);
+			oContext.setUpdated(true);
+			this.getModel().updateBindings(true);
+			MessageToast.show(this.getResourceBundle().getText("homeSnoozeConfirm", [oContext.getProperty("title")]));
 		}
 
 	});

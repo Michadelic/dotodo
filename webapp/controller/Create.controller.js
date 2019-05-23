@@ -5,7 +5,7 @@ sap.ui.define([
 ], function(Controller, MessageToast, formatter) {
 	"use strict";
 
-	return Controller.extend("sap.ui.demo.basicTemplate.controller.Create", {
+	return Controller.extend("michadelic.dotodo.controller.Create", {
 
 		formatter: formatter,
 

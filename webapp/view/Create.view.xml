@@ -1,8 +1,9 @@
 <mvc:View
-	controllerName="sap.ui.demo.basicTemplate.controller.Create"
+	controllerName="michadelic.dotodo.controller.Create"
 	displayBlock="true"
 	xmlns="sap.m"
 	xmlns:form="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc">
 	<Page
 		id="page"
@@ -37,6 +38,24 @@
 				<Input
 					id="todoIcon"
 					value="{icon}"/>
+				<Label
+					labelFor="todoAmount"
+					text="{i18n>createAmountLabel}"/>
+				<Input
+					id="todoAmount"
+					value="{amount}"
+					description="{i18n>createFrequencyDescription}"
+					fieldWidth="90%"/>
+				<Label
+					labelFor="todoFrequency"
+					text="{i18n>createFrequencyLabel}"/>
+				<Select
+					id="todoFrequency"
+					selectedKey="{frequency}">
+					<core:Item key="day" text="{i18n>createFrequencyOptionDay}" />
+					<core:Item key="week" text="{i18n>createFrequencyOptionWeek}" />
+					<core:Item key="month" text="{i18n>createFrequencyOptionMonth}" />
+				</Select>
 			</form:SimpleForm>
 		</content>
 	</Page>

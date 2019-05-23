@@ -1,14 +1,15 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
+	"./controller/constants",
 	"sap/ui/Device",
 	"./model/LocalStorageModel",
 	"./model/models"
-], function(UIComponent, Device, LocalStorageModel, models) {
+], function(UIComponent, constants, Device, LocalStorageModel, models) {
 	"use strict";
 
 	const SORT_URGENCY = "urgency";
 
-	return UIComponent.extend("sap.ui.demo.basicTemplate.Component", {
+	return UIComponent.extend("michadelic.dotodo.Component", {
 
 		metadata: {
 			manifest: "json"
@@ -34,7 +35,9 @@ sap.ui.define([
 				title: "TODO",
 				description: "",
 				icon: "sap-icon://task",
-				category: "Misc"
+				category: "Misc",
+				frequency: constants.FREQUENCY_DAILY,
+				amount: 1
 			};
 
 			// call the base component's init function

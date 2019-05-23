@@ -1,7 +1,7 @@
 /*global QUnit*/
 
 sap.ui.define([
-	"sap/ui/demo/basicTemplate/controller/App.controller"
+	"michadelic/dotodo/controller/App.controller"
 ], function(Controller) {
 	"use strict";
 
